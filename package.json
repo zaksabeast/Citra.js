@@ -1,0 +1,24 @@
+{
+  "name": "citra.js",
+  "version": "0.1.0",
+  "description": "Node.js bindings for Citra",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaksabeast/Citra.js.git"
+  },
+  "keywords": [
+    "Citra",
+    "3DS",
+    "Nintendo"
+  ],
+  "author": "Zaksabeast",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zaksabeast/Citra.js/issues"
+  },
+  "homepage": "https://github.com/zaksabeast/Citra.js#readme",
+  "dependencies": {
+    "zeromq": "^5.0.0"
+  }
+}
