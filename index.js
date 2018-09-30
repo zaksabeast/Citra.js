@@ -22,7 +22,7 @@ const createConnection = (address = '127.0.0.1', port = 45987) => {
 
 /**
  * Reads from Citra's memory
- * @param {Socket} citra The Citra connection
+ * @param {Promise<Socket>} citra The Citra connection
  * @param {number} memoryAddr The memory address to read from Citra
  * @param {number} dataLength The length of data to read from Citra's memory
  * @returns {number} The value from Citra's memory
@@ -39,7 +39,7 @@ const readMemory = (citra, memoryAddr, dataLength) => {
 
 /**
  * Writes to Citra's memory
- * @param {Socket} citra The Citra connection
+ * @param {Promise<Socket>} citra The Citra connection
  * @param {number} memoryAddr The memory address to write to Citra
  * @param {Buffer} buf The data to write to Citra
  * @returns {Buffer} The response from Citra
