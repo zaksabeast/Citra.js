@@ -102,13 +102,13 @@ const readAndValidateHeader = (
   return null;
 };
 
-const parseReply = (reply, dataLen) => {
+const parseReply = (reply) => {
   return [
     reply.readUIntLE(0, 4),
     reply.readUIntLE(4, 4),
     reply.readUIntLE(8, 4),
     reply.readUIntLE(12, 4),
-    reply.readUIntLE(16, dataLen),
+    reply.slice(16)
   ];
 };
 
