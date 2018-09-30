@@ -1,5 +1,7 @@
 const zmq = require('zeromq');
 
+const CURRENT_REQUEST_VERSION = 1;
+
 /**
  * Creates a connection to Citra
  * @param {string} [address=127.0.0.1] Citra's address
@@ -21,7 +23,7 @@ const createConnection = (address = '127.0.0.1', port = 45987) => {
 /**
  * Reads from Citra's memory
  * @param {Socket} citra The Citra connection
- * @param {string} memoryAddr The memory address to read from Citra
+ * @param {number} memoryAddr The memory address to read from Citra
  * @param {number} dataLength The length of data to read from Citra's memory
  * @returns {number} The value from Citra's memory
  */
@@ -38,7 +40,7 @@ const readMemory = (citra, memoryAddr, dataLength) => {
 /**
  * Writes to Citra's memory
  * @param {Socket} citra The Citra connection
- * @param {string} memoryAddr The memory address to write to Citra
+ * @param {number} memoryAddr The memory address to write to Citra
  * @param {Buffer} buf The data to write to Citra
  * @returns {Buffer} The response from Citra
  */
@@ -57,8 +59,7 @@ const make32BitBuffer = (...nums) => {
 };
 
 const generateHeader = (reqType, dataLen) => {
-  const CURRENT_REQUEST_VERSION = 1;
-  const reqId = Math.random() * 0xffffffff;
+  const reqId = Math.floor(Math.random() * 0xffffffff);
   return {
     reqId,
     header: make32BitBuffer(CURRENT_REQUEST_VERSION, reqId, reqType, dataLen),
@@ -85,7 +86,6 @@ const readAndValidateHeader = (
   expectedType,
   expectedLength,
 ) => {
-  const CURRENT_REQUEST_VERSION = 1;
   const [replyVersion, replyId, replyType, replyLen, data] = parseReply(
     reply,
     expectedLength,
